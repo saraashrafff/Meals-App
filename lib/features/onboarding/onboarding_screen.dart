@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meals_app/core/app_colors.dart';
 import 'package:meals_app/features/home/home_screen.dart';
-import 'package:meals_app/features/onboarding/onboarding_model.dart';
 import 'package:meals_app/features/onboarding/onboarding_item.dart';
+import 'package:meals_app/features/onboarding/onboarding_model.dart';
 
 class OnboardingScreen extends StatefulWidget {
   static const routeName = '/onboarding-screen';
+
+  const OnboardingScreen({super.key});
 
   @override
   State<OnboardingScreen> createState() => _OnboardingScreenState();
@@ -50,7 +52,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     carouselController: sliderController,
                     itemCount: onboardingScreens.length,
                     itemBuilder: (_, int index, _) {
-                      return OnboardingModel(index: index, onTap: () {});
+                      return OnboardingItem(index: index);
                     },
                     options: CarouselOptions(
                       viewportFraction: 1,
@@ -66,7 +68,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     dotsCount: titles.length,
                     position: currentIndex.toDouble(),
                     onTap: (index) {
-                      debugPrint('onTap: $index');
                       sliderController.animateToPage(index);
                     },
                     decorator: DotsDecorator(
@@ -141,6 +142,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             right: 30.w,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.symmetric(horizontal: 30.w),
                 backgroundColor: AppColor.primary.withOpacity(0.9),
                 foregroundColor: Colors.white,
               ),
@@ -149,6 +151,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               },
               child: Text(
                 context.locale.languageCode == 'en' ? 'English' : 'العربية',
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14.sp),
               ),
             ),
           ),

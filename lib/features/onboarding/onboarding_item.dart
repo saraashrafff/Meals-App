@@ -1,30 +1,44 @@
-class OnboardingItem {
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:meals_app/core/app_colors.dart';
+import 'package:meals_app/features/onboarding/onboarding_model.dart';
+
+// ignore: must_be_immutable
+class OnboardingItem extends StatefulWidget {
   int index;
-  String title;
-  String description;
-  OnboardingItem({
-    required this.title,
-    required this.description,
-    required this.index,
-  });
+  OnboardingItem({super.key, required this.index});
+
+  @override
+  State<OnboardingItem> createState() => _OnboardingItemState();
 }
 
-List<String> titles = [
-  "save_your_meals_ingredient",
-  "use_our_app_the_best_choice",
-  "our_app_your_ultimate_choice",
-];
-List<String> descriptions = [
-  "add_your_meals_and_its_ingredients_and_we_will_save_it_for_you",
-  "the_best_choice_for_your_kitchen_do_not_hesitate",
-  "all_the_best_restaurants_and_their_top_menus_are_ready_for_you",
-];
-
-List<OnboardingItem> onboardingScreens = List.generate(
-  titles.length,
-  (index) => OnboardingItem(
-    title: titles[index],
-    description: descriptions[index],
-    index: index,
-  ),
-);
+class _OnboardingItemState extends State<OnboardingItem> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          onboardingScreens[widget.index].title.tr(),
+          style: TextStyle(
+            fontSize: 30.sp,
+            color: AppColor.white,
+            fontWeight: FontWeight.bold,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        SizedBox(height: 20.h),
+        Text(
+          onboardingScreens[widget.index].description.tr(),
+          style: TextStyle(
+            fontSize: 14.sp,
+            color: AppColor.white,
+            fontWeight: FontWeight.w600,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        SizedBox(height: 30.h),
+      ],
+    );
+  }
+}
