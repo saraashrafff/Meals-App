@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meals_app/core/app_colors.dart';
 import 'package:meals_app/features/home/home_screen.dart';
 import 'package:meals_app/features/onboarding/onboarding_model.dart';
-import 'package:meals_app/features/onboarding/onboarding_item.dart';
+import 'package:meals_app/features/onboarding/onboarding.dart';
 
 class OnboardingScreen extends StatefulWidget {
   static const routeName = '/onboarding-screen';
@@ -141,6 +141,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             right: 30.w,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.symmetric(horizontal: 30.w),
                 backgroundColor: AppColor.primary.withOpacity(0.9),
                 foregroundColor: Colors.white,
               ),
@@ -149,6 +150,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               },
               child: Text(
                 context.locale.languageCode == 'en' ? 'English' : 'العربية',
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14.sp),
               ),
             ),
           ),
