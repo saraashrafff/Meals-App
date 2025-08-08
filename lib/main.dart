@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:meals_app/features/home/home_screen.dart';
 import 'package:meals_app/features/onboarding/onboarding_screen.dart';
 
 void main() async {
@@ -20,13 +22,23 @@ class MealsApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
-      debugShowCheckedModeBanner: false,
-      initialRoute: OnboardingScreen.routeName,
-      routes: {OnboardingScreen.routeName: (context) => OnboardingScreen()},
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (_, child) {
+        return MaterialApp(
+          localizationsDelegates: context.localizationDelegates,
+          supportedLocales: context.supportedLocales,
+          locale: context.locale,
+          debugShowCheckedModeBanner: false,
+          initialRoute: OnboardingScreen.routeName,
+          routes: {
+            OnboardingScreen.routeName: (context) => OnboardingScreen(),
+            HomeScreen.routeName: (context) => HomeScreen(),
+          },
+        );
+      },
     );
   }
 }
