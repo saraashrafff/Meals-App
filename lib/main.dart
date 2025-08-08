@@ -1,8 +1,18 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:meals_app/features/onboarding/onboarding_screen.dart';
 
-void main() {
-  runApp(MealsApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+  runApp(
+    EasyLocalization(
+      supportedLocales: [Locale('en'), Locale('ar')],
+      path: 'assets/translations',
+      fallbackLocale: Locale('en'),
+      child: MealsApp(),
+    ),
+  );
 }
 
 class MealsApp extends StatelessWidget {
@@ -11,6 +21,9 @@ class MealsApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       debugShowCheckedModeBanner: false,
       initialRoute: OnboardingScreen.routeName,
       routes: {OnboardingScreen.routeName: (context) => OnboardingScreen()},
