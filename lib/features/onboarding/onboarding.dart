@@ -1,8 +1,8 @@
-class OnboardingModel {
+class Onboarding {
   int index;
   String title;
   String description;
-  OnboardingModel({
+  Onboarding({
     required this.title,
     required this.description,
     required this.index,
@@ -20,9 +20,9 @@ List<String> descriptions = [
   "all_the_best_restaurants_and_their_top_menus_are_ready_for_you",
 ];
 
-List<OnboardingModel> onboardingScreens = List.generate(
+List<Onboarding> onboardingScreens = List.generate(
   titles.length,
-  (index) => OnboardingModel(
+  (index) => Onboarding(
     title: titles[index],
     description: descriptions[index],
     index: index,
