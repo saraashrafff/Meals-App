@@ -1,6 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dots_indicator/dots_indicator.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meals_app/core/app_colors.dart';
@@ -8,6 +11,7 @@ import 'package:meals_app/features/home/home_screen.dart';
 import 'package:meals_app/features/onboarding/onboarding_iteml.dart';
 import 'package:meals_app/features/onboarding/onboarding_model.dart';
 
+class OnboardingScreen extends StatefulWidget {
 class OnboardingScreen extends StatefulWidget {
   static const routeName = '/onboarding-screen';
 
