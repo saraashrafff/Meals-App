@@ -4,16 +4,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meals_app/core/app_colors.dart';
 import 'package:meals_app/features/onboarding/onboarding.dart';
 
-class OnboardingModel extends StatefulWidget {
+// ignore: must_be_immutable
+class OnboardingItem extends StatefulWidget {
   int index;
-  VoidCallback? onTap;
-  OnboardingModel({super.key, required this.index, required this.onTap});
+  OnboardingItem({super.key, required this.index});
 
   @override
-  State<OnboardingModel> createState() => _OnboardingModelState();
+  State<OnboardingItem> createState() => _OnboardingItemState();
 }
 
-class _OnboardingModelState extends State<OnboardingModel> {
+class _OnboardingItemState extends State<OnboardingItem> {
   @override
   Widget build(BuildContext context) {
     return Column(

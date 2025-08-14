@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meals_app/core/app_colors.dart';
 import 'package:meals_app/features/home/home_screen.dart';
-import 'package:meals_app/features/onboarding/onboarding_model.dart';
 import 'package:meals_app/features/onboarding/onboarding.dart';
+import 'package:meals_app/features/onboarding/onboarding_item.dart';
 
 class OnboardingScreen extends StatefulWidget {
   static const routeName = '/onboarding-screen';
+
+  const OnboardingScreen({super.key});
 
   @override
   State<OnboardingScreen> createState() => _OnboardingScreenState();
@@ -50,7 +52,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     carouselController: sliderController,
                     itemCount: onboardingScreens.length,
                     itemBuilder: (_, int index, _) {
-                      return OnboardingModel(index: index, onTap: () {});
+                      return OnboardingItem(index: index);
                     },
                     options: CarouselOptions(
                       viewportFraction: 1,
@@ -66,7 +68,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     dotsCount: titles.length,
                     position: currentIndex.toDouble(),
                     onTap: (index) {
-                      debugPrint('onTap: $index');
                       sliderController.animateToPage(index);
                     },
                     decorator: DotsDecorator(
