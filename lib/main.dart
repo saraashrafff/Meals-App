@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meals_app/features/home/home_screen.dart';
 import 'package:meals_app/features/onboarding/onboarding_screen.dart';
-import 'package:meals_app/splash_screen.dart';
+import 'package:meals_app/features/splash/splash_screen.dart';
+import 'package:meals_app/meal_details_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,6 +39,7 @@ class MealsApp extends StatelessWidget {
             SplashScreen.routeName: (context) => SplashScreen(),
             OnboardingScreen.routeName: (context) => OnboardingScreen(),
             HomeScreen.routeName: (context) => HomeScreen(),
+            MealDetailsScreen.routeName: (context) => MealDetailsScreen(),
           },
         );
       },
