@@ -4,7 +4,7 @@ import 'package:meals_app/core/app_colors.dart';
 import 'package:meals_app/features/onboarding/onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
-  static const routeName = '/';
+  static const routeName = '/splash';
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }

@@ -5,22 +5,28 @@ import 'package:meals_app/features/home/home_screen.dart';
 import 'package:meals_app/features/onboarding/onboarding_screen.dart';
 import 'package:meals_app/features/splash/splash_screen.dart';
 import 'package:meals_app/meal_details_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool isFirstRun = prefs.getBool('isFirstRun') ?? true;
+  print("DEBUG >>> isFirstRun = $isFirstRun");
+
   runApp(
     EasyLocalization(
       supportedLocales: [Locale('en'), Locale('ar')],
       path: 'assets/translations',
       fallbackLocale: Locale('en'),
-      child: MealsApp(),
+      child: MealsApp(isFirstRun: isFirstRun),
     ),
   );
 }
 
 class MealsApp extends StatelessWidget {
-  const MealsApp({super.key});
+  final bool isFirstRun;
+  const MealsApp({super.key, required this.isFirstRun});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +40,10 @@ class MealsApp extends StatelessWidget {
           supportedLocales: context.supportedLocales,
           locale: context.locale,
           debugShowCheckedModeBanner: false,
-          initialRoute: SplashScreen.routeName,
+          // home: isFirstRun ? OnboardingScreen() : HomeScreen(),
+          initialRoute: isFirstRun
+              ? OnboardingScreen.routeName
+              : HomeScreen.routeName,
           routes: {
             SplashScreen.routeName: (context) => SplashScreen(),
             OnboardingScreen.routeName: (context) => OnboardingScreen(),

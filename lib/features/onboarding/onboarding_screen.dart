@@ -7,6 +7,7 @@ import 'package:meals_app/core/app_colors.dart';
 import 'package:meals_app/features/home/home_screen.dart';
 import 'package:meals_app/features/onboarding/onboarding_model.dart';
 import 'package:meals_app/features/onboarding/onboarding_item.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OnboardingScreen extends StatefulWidget {
   static const routeName = '/onboarding-screen';
@@ -89,7 +90,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             TextButton(
-                              onPressed: () {
+                              onPressed: () async {
+                                await finishOnBoarding();
                                 Navigator.of(
                                   context,
                                 ).pushReplacementNamed(HomeScreen.routeName);
@@ -119,7 +121,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           ],
                         )
                       : InkWell(
-                          onTap: () {
+                          onTap: () async {
+                            await finishOnBoarding();
                             Navigator.of(
                               context,
                             ).pushReplacementNamed(HomeScreen.routeName);
@@ -166,5 +169,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     } else {
       context.setLocale(Locale('en'));
     }
+  }
+
+  Future<void> finishOnBoarding() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isFirstRun', false);
   }
 }
