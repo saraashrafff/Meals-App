@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meals_app/core/app_colors.dart';
+import 'package:meals_app/database/dp_helper.dart';
 import 'package:meals_app/features/home/home_screen.dart';
 import 'package:meals_app/features/onboarding/onboarding_model.dart';
 import 'package:meals_app/features/onboarding/onboarding_item.dart';
@@ -22,6 +23,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   int currentIndex = 0;
   CarouselSliderController sliderController = CarouselSliderController();
   Locale currentLocale = Locale('en');
+  @override
+  void initState() {
+    super.initState();
+    getMeals();
+  }
+
+  void getMeals() async {
+    DatabaseHelper databaseHelper = DatabaseHelper.instance;
+    final meals = await databaseHelper.getMeals();
+    debugPrint(meals.toString());
+  }
 
   @override
   Widget build(BuildContext context) {

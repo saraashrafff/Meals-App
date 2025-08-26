@@ -5,6 +5,8 @@ import 'package:meals_app/features/onboarding/onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   static const routeName = '/splash';
+
+  const SplashScreen({super.key});
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }

@@ -1,10 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:meals_app/database/dp_helper.dart';
 import 'package:meals_app/features/home/home_screen.dart';
 import 'package:meals_app/features/onboarding/onboarding_screen.dart';
 import 'package:meals_app/features/splash/splash_screen.dart';
 import 'package:meals_app/meal_details_screen.dart';
+import 'package:meals_app/models/meal_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
@@ -13,6 +15,41 @@ void main() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool isFirstRun = prefs.getBool('isFirstRun') ?? true;
   print("DEBUG >>> isFirstRun = $isFirstRun");
+
+  // MealModel soup = MealModel(
+  //   mealName: " Vegetable Soup",
+  //   mealCalories: "400",
+  //   mealDescription: "A warm vegetable soup packed with nutrients and flavor.",
+  //   mealRating: "3.7",
+  //   mealCookingTime: "20 - 30",
+  //   mealImageUrl:
+  //       'https://citrineliving.com/wp-content/uploads/2021/10/cream-of-vegetable-soup-recipe-1.jpg',
+  // );
+  // MealModel chicken = MealModel(
+  //   mealName: "Chicken Salad",
+  //   mealCalories: "600",
+  //   mealDescription:
+  //       "A healthy salad with grilled chicken, fresh veggies, and light dressing.",
+  //   mealRating: "4.2",
+  //   mealCookingTime: "15 - 20",
+  //   mealImageUrl:
+  //       'https://www.eatwell101.com/wp-content/uploads/2023/06/grilled-chicken-salad-recipe-1.jpg',
+  // );
+  // MealModel smoothie = MealModel(
+  //   mealName: 'Breakfast Smoothie',
+  //   mealCalories: '350',
+  //   mealDescription:
+  //       'A refreshing smoothie made with fruits and yogurt to kickstart your day.',
+  //   mealRating: '5.0',
+  //   mealCookingTime: '5 : 10',
+  //   mealImageUrl:
+  //       'https://tatyanaseverydayfood.com/wp-content/uploads/2015/01/Fruit-Smoothie.jpg',
+  // );
+
+  // DatabaseHelper databaseHelper = DatabaseHelper.instance;
+  // await databaseHelper.insertMeal(chicken);
+  // await databaseHelper.insertMeal(soup);
+  // await databaseHelper.insertMeal(smoothie);
 
   runApp(
     EasyLocalization(

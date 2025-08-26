@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:meals_app/core/app_colors.dart';
 import 'package:meals_app/meal_details_screen.dart';
@@ -18,10 +19,17 @@ class MealItem extends StatelessWidget {
       },
       child: Row(
         children: [
-          Image.asset(
-            'assets/images/${meal.mealImageName}.png',
-            height: screenSize.height * 0.1,
-            width: screenSize.height * 0.1,
+          ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: CachedNetworkImage(
+            imageUrl: meal.mealImageUrl,
+            placeholder: (context, url) =>
+                Container(decoration: BoxDecoration(color: AppColor.grey)),
+            errorWidget: (context, url, error) => Icon(Icons.error),
+              height: screenSize.height * 0.08,
+              width: screenSize.height * 0.08,
+              fit: BoxFit.cover,
+            ),
           ),
           SizedBox(width: 16),
           Column(

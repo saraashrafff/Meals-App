@@ -3,10 +3,12 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meals_app/core/app_colors.dart';
-import 'package:meals_app/models/meal_model.dart';
+import 'package:meals_app/database/dp_helper.dart';
 import 'package:meals_app/widgets/meal_item.dart';
 
 class HomeTab extends StatefulWidget {
+  const HomeTab({super.key});
+
   @override
   State<HomeTab> createState() => _HomeTabState();
 }
@@ -40,7 +42,11 @@ class _HomeTabState extends State<HomeTab> {
                   child: DotsIndicator(
                     dotsCount: headerImageNames.length,
                     position: currentIndex.toDouble(),
-                    onTap: (index) {},
+                    onTap: (index) {
+                      setState(() {
+                        currentIndex = index;
+                      });
+                    },
                     decorator: DotsDecorator(
                       size: Size(20.w, 6.h),
                       shape: RoundedRectangleBorder(
@@ -82,11 +88,25 @@ class _HomeTabState extends State<HomeTab> {
         ),
         SizedBox(height: 20),
         Expanded(
-          child: ListView.separated(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            itemBuilder: (_, index) => MealItem(meal: MealModel.meals[index]),
-            separatorBuilder: (_, _) => SizedBox(height: 8),
-            itemCount: MealModel.meals.length,
+          child: FutureBuilder(
+            future: DatabaseHelper.instance.getMeals(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                return Center(child: Text("No meals found"));
+              } else if (snapshot.hasError) {
+                return Center(child: Text(snapshot.error.toString()));
+              } else {
+                final meals = snapshot.data!;
+                return ListView.separated(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  itemBuilder: (_, index) => MealItem(meal: meals[index]),
+                  separatorBuilder: (_, _) => SizedBox(height: 8),
+                  itemCount: meals.length,
+                );
+              }
+            },
           ),
         ),
       ],

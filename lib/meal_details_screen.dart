@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:meals_app/core/app_colors.dart';
@@ -5,6 +6,8 @@ import 'package:meals_app/models/meal_model.dart';
 
 class MealDetailsScreen extends StatelessWidget {
   static const routeName = 'meal-details';
+
+  const MealDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +30,11 @@ class MealDetailsScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.asset(
-            'assets/images/${meal.mealImageName}.png',
+          CachedNetworkImage(
+            imageUrl: meal.mealImageUrl,
+            placeholder: (context, url) =>
+                Container(decoration: BoxDecoration(color: AppColor.grey)),
+            errorWidget: (context, url, error) => Icon(Icons.error),
             height: screenSize.height * 0.35,
             width: screenSize.width,
             fit: BoxFit.cover,
